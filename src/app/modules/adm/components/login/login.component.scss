@@ -16,8 +16,8 @@
 .card {
 
   &-login {
-    //margin-top: 6%;
     margin-top: 20%;
+    width: 450px;
   }
 
   &-logo {
@@ -72,3 +72,9 @@
 }
 
 
+@media (max-width: 601px) {
+  .card-login {
+    //width: 90%;
+    width: 270px;
+  }
+}

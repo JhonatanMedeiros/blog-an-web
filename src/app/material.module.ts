@@ -10,6 +10,7 @@ import {
   MatSidenavModule,
   MatInputModule,
   MatCardModule,
+  MatProgressBarModule,
 } from '@angular/material';
 
 @NgModule({
@@ -22,7 +23,8 @@ import {
     MatToolbarModule,
     MatSidenavModule,
     MatInputModule,
-    MatCardModule
+    MatCardModule,
+    MatProgressBarModule
   ],
   exports: [
     MatIconModule,
@@ -32,7 +34,8 @@ import {
     MatToolbarModule,
     MatSidenavModule,
     MatInputModule,
-    MatCardModule
+    MatCardModule,
+    MatProgressBarModule
   ],
   declarations: []
 })

@@ -14,9 +14,21 @@ export class LoginComponent implements OnInit {
 
   formLogin: FormGroup;
 
+  formLost: FormGroup;
+
+  isLoginForm: boolean = false;
+
+  inputEmail: string = '';
+  inputPassword: string = '';
+
+  inProgress: boolean = false;
+
+
   constructor(private fb: FormBuilder) {
 
-    this.createForm();
+    this.createFormLogin();
+
+    this.createFormLost();
 
     document.querySelector('body').classList.add('body-login');
   }
@@ -26,7 +38,7 @@ export class LoginComponent implements OnInit {
 
   }
 
-  createForm() {
+  createFormLogin() {
 
     this.formLogin = this.fb.group({
       email: ['' ,
@@ -45,5 +57,48 @@ export class LoginComponent implements OnInit {
     });
 
   };
+
+  createFormLost() {
+
+    this.formLost = this.fb.group({
+      email: ['' ,
+        [
+          Validators.required,
+          Validators.pattern(EMAIL_REGEX)
+        ]
+      ]
+    });
+
+  };
+
+  changeFormView() {
+
+    if (!this.inProgress) {
+      this.isLoginForm = !this.isLoginForm;
+    }
+
+  }
+
+
+  //login
+  singUp(): void {
+
+    this.inProgress = true;
+
+    setTimeout(() => {
+      this.inProgress = false;
+    }, 5000)
+
+  }
+
+  recoveryPassword(): void {
+
+    this.inProgress = true;
+
+    setTimeout(() => {
+      this.inProgress = false;
+    }, 5000)
+
+  }
 
 }

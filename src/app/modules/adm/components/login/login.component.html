@@ -1,3 +1,4 @@
+<mat-progress-bar mode="indeterminate" color="warn" *ngIf="inProgress"></mat-progress-bar>
 <div class="container">
 
   <div>
@@ -9,14 +10,17 @@
       </div>
 
       <div class="form-header">
-        <h1>Login</h1>
-        <p>Entre com seu usuário</p>
+        <h1 *ngIf="!isLoginForm">Login</h1>
+        <h1 *ngIf="isLoginForm">Recuperação</h1>
+
+        <p *ngIf="!isLoginForm">Entre com seu usuário</p>
+        <p *ngIf="isLoginForm">Digite seu e-mail</p>
       </div>
 
-      <form class="form-container" [formGroup]="formLogin">
+      <form *ngIf="!isLoginForm" class="form-container" [formGroup]="formLogin">
 
         <mat-form-field class="form-input" color="accent">
-          <input matInput placeholder="E-mail" formControlName="email">
+          <input matInput placeholder="E-mail" formControlName="email" [(ngModel)]="inputEmail">
           <mat-error *ngIf="formLogin.get('email').hasError('pattern')">
             Digite um e-mail válido
           </mat-error>
@@ -26,7 +30,7 @@
         </mat-form-field>
 
         <mat-form-field class="form-input" color="accent">
-          <input matInput placeholder="Senha" type="password" formControlName="password">
+          <input matInput placeholder="Senha" type="password" formControlName="password" [(ngModel)]="inputPassword">
           <mat-error *ngIf="formLogin.get('password').hasError('minlength')">
             Mínimo 5 caracteres
           </mat-error>
@@ -39,11 +43,35 @@
         </mat-form-field>
 
         <div>
-          <a mat-button routerLink="." color="accent">Esqueceu sua senha ?</a>
+          <a mat-button routerLink="." [disabled]="inProgress" color="accent" (click)="changeFormView()">Esqueceu sua senha ?</a>
 
           <button mat-raised-button color="accent" type="button"
-                  [disabled]="!formLogin.valid" class="form-btn-login">
-            Login
+                  [disabled]="!formLogin.valid || inProgress" class="form-btn-login" (click)="singUp()">
+            Entrar
+          </button>
+
+        </div>
+
+      </form>
+
+      <form *ngIf="isLoginForm" class="form-container" [formGroup]="formLost">
+
+        <mat-form-field class="form-input" color="accent">
+          <input matInput placeholder="E-mail" formControlName="email" [(ngModel)]="inputEmail">
+          <mat-error *ngIf="formLogin.get('email').hasError('pattern')">
+            Digite um e-mail válido
+          </mat-error>
+          <mat-error *ngIf="formLogin.get('email').hasError('required')">
+            E-mail é <strong>obrigatório</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <div>
+          <a mat-button routerLink="." [disabled]="inProgress" color="accent" (click)="changeFormView()">Já tenho uma conta</a>
+
+          <button mat-raised-button color="accent" type="button"
+                  [disabled]="!formLost.valid || inProgress" class="form-btn-login" (click)="recoveryPassword()">
+            Enviar
           </button>
 
         </div>
