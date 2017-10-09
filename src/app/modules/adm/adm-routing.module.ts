@@ -10,6 +10,8 @@ import { MembersComponent } from './components/main/sub-components/members/membe
 import { PostComponent } from './components/main/sub-components/post/post.component';
 
 
+import { AuthGuard } from './shared/guard/auth-guard.service';
+
 const routes: Routes = [
 
   {
@@ -23,6 +25,7 @@ const routes: Routes = [
       {
         path: '',
         component: MainComponent,
+        canActivate: [AuthGuard],
         children: [
           {
             path: '',

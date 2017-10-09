@@ -5,6 +5,8 @@ import { MaterialModule } from '../../material.module';
 
 import { AdmRoutingModule } from './adm-routing.module';
 
+import { AuthGuard } from './shared/guard/auth-guard.service';
+
 import { CoreComponent } from './core/core.component';
 
 import { MainComponent } from './components/main/main.component';
@@ -31,6 +33,7 @@ import { PostComponent } from './components/main/sub-components/post/post.compon
     DasboardComponent,
     MembersComponent,
     PostComponent,
-  ]
+  ],
+  providers: [AuthGuard]
 })
 export class AdmModule { }
