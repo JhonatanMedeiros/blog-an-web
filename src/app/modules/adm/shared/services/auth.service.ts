@@ -10,16 +10,15 @@ import { environment } from '../../../../../environments/environment';
 @Injectable()
 export class AuthService {
 
-  token: any = localStorage.getItem('token');
-
   constructor(
     private router: Router,
-    private http: Http) { }
+    private http: Http) {
+  }
 
 
   isLogin(): boolean {
 
-    if (this.token) {
+    if (this.getToken()) {
       return true;
     }else {
       return false;
@@ -27,21 +26,26 @@ export class AuthService {
 
   }
 
+  getToken (): any {
+
+    if (localStorage.getItem('token') !== null) {
+      return localStorage.getItem('token');
+    }else {
+      return false;
+    }
+  }
+
   setToken(user): void {
 
-    let token = user.token;
-
-    localStorage.setItem('token', token);
-
-    this.token = token;
+    localStorage.setItem('token', user.token);
 
   }
 
   removeToken(): void {
 
-    if (this.token) {
-      localStorage.removeItem('token');
-    }
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
+
   }
 
 

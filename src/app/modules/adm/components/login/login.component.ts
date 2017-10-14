@@ -97,7 +97,6 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.user)
       .subscribe(
         response => {
-          console.log(response);
 
           this.authService.setToken(response);
           this.inProgress = false;

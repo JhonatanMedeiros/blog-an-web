@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { HttpModule } from '@angular/http';
+import { MatDialog } from '@angular/material';
 
 
 import { MaterialModule } from '../../material.module';
@@ -19,6 +20,9 @@ import { DasboardComponent } from './components/main/sub-components/dasboard/das
 import { MembersComponent } from './components/main/sub-components/members/members.component';
 import { PostComponent } from './components/main/sub-components/post/post.component';
 import { AuthService } from './shared/services/auth.service';
+import { ProfileComponent } from './components/main/sub-components/profile/profile.component';
+import { SettingsComponent } from './components/main/sub-components/settings/settings.component';
+import { DialogComponent } from './shared/dialog/dialog.component';
 
 
 
@@ -38,10 +42,17 @@ import { AuthService } from './shared/services/auth.service';
     DasboardComponent,
     MembersComponent,
     PostComponent,
+    ProfileComponent,
+    SettingsComponent,
+    DialogComponent
+  ],
+  entryComponents: [
+    DialogComponent
   ],
   providers: [
     AuthService,
-    AuthGuard
+    AuthGuard,
+    MatDialog
   ]
 })
 export class AdmModule { }
