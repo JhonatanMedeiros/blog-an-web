@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, Route } from '@angular/router';
+
+import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,7 +20,8 @@ export class MainComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -32,6 +35,13 @@ export class MainComponent implements OnInit {
       return false;
     }
 
+  }
+
+  logout(): void {
+
+    this.authService.removeToken();
+
+    this.router.navigate(['/login']);
   }
 
 }

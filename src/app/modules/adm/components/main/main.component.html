@@ -12,19 +12,19 @@
     <!-- This fills the remaining space of the current row -->
     <span style="flex: 1 1 auto;"></span>
 
-    <button mat-icon-button [matMenuTriggerFor]="menu">
-      <mat-icon>more_vert</mat-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item disabled>
-        <mat-icon>person</mat-icon>
-        <span>Perfil</span>
-      </button>
-      <button mat-menu-item>
-        <mat-icon>exit_to_app</mat-icon>
-        <span>Sair</span>
-      </button>
-    </mat-menu>
+    <!--<button mat-icon-button [matMenuTriggerFor]="menu">-->
+      <!--<mat-icon>more_vert</mat-icon>-->
+    <!--</button>-->
+    <!--<mat-menu #menu="matMenu">-->
+      <!--<button mat-menu-item disabled>-->
+        <!--<mat-icon>person</mat-icon>-->
+        <!--<span>Perfil</span>-->
+      <!--</button>-->
+      <!--<button mat-menu-item>-->
+        <!--<mat-icon>exit_to_app</mat-icon>-->
+        <!--<span>Sair</span>-->
+      <!--</button>-->
+    <!--</mat-menu>-->
 
   </mat-toolbar>
 
@@ -52,6 +52,11 @@
                        [ngClass]="{'isActiveMenu' : getRouter(menu)}">
           <mat-icon matListIcon>{{menu.icon}}</mat-icon>
           <h3 matLine> {{menu.text}} </h3>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item (click)="logout()">
+          <mat-icon matListIcon>exit_to_app</mat-icon>
+          <h3 matLine>Sair</h3>
         </mat-list-item>
 
       </mat-nav-list>
