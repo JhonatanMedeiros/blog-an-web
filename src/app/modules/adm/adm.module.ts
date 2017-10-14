@@ -19,6 +19,8 @@ import { DasboardComponent } from './components/main/sub-components/dasboard/das
 import { MembersComponent } from './components/main/sub-components/members/members.component';
 import { PostComponent } from './components/main/sub-components/post/post.component';
 import { AuthService } from './shared/services/auth.service';
+import { ProfileComponent } from './components/main/sub-components/profile/profile.component';
+import { SettingsComponent } from './components/main/sub-components/settings/settings.component';
 
 
 
@@ -37,7 +39,9 @@ import { AuthService } from './shared/services/auth.service';
     MainComponent,
     DasboardComponent,
     MembersComponent,
-    PostComponent
+    PostComponent,
+    ProfileComponent,
+    SettingsComponent
   ],
   providers: [
     AuthService,

@@ -13,7 +13,7 @@ export class MainComponent implements OnInit {
     {icon: 'account_circle', text: 'Perfil', link: '/adm/profile'},
     {icon: 'note', text: 'Postagens', link: '/adm/post'},
     {icon: 'group', text: 'Membros', link: '/adm/members'},
-    {icon: 'settings', text: 'Configurações', link: '/adm/config'},
+    {icon: 'settings', text: 'Configurações', link: '/adm/settings'},
   ];
 
   constructor(

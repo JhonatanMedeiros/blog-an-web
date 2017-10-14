@@ -5,8 +5,10 @@ import { CoreComponent } from './core/core.component';
 import { LoginComponent } from './components/login/login.component';
 import { MainComponent } from './components/main/main.component';
 
-import { DasboardComponent } from './components/main/sub-components/dasboard/dasboard.component'
-import { MembersComponent } from './components/main/sub-components/members/members.component'
+import { DasboardComponent } from './components/main/sub-components/dasboard/dasboard.component';
+import { SettingsComponent } from './components/main/sub-components/settings/settings.component';
+import { ProfileComponent } from './components/main/sub-components/profile/profile.component';
+import { MembersComponent } from './components/main/sub-components/members/members.component';
 import { PostComponent } from './components/main/sub-components/post/post.component';
 
 
@@ -38,6 +40,14 @@ const routes: Routes = [
           {
             path: 'post',
             component: PostComponent,
+          },
+          {
+            path: 'profile',
+            component: ProfileComponent,
+          },
+          {
+            path: 'settings',
+            component: SettingsComponent,
           }
         ]
       }
