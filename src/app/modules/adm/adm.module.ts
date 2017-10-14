@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { HttpModule } from '@angular/http';
+
+
 import { MaterialModule } from '../../material.module';
 
 import { AdmRoutingModule } from './adm-routing.module';
@@ -15,12 +18,14 @@ import { LoginComponent } from './components/login/login.component';
 import { DasboardComponent } from './components/main/sub-components/dasboard/dasboard.component';
 import { MembersComponent } from './components/main/sub-components/members/members.component';
 import { PostComponent } from './components/main/sub-components/post/post.component';
+import { AuthService } from './shared/services/auth.service';
 
 
 
 @NgModule({
   imports: [
     CommonModule,
+    HttpModule,
     AdmRoutingModule,
     MaterialModule,
     FormsModule,
@@ -34,6 +39,9 @@ import { PostComponent } from './components/main/sub-components/post/post.compon
     MembersComponent,
     PostComponent,
   ],
-  providers: [AuthGuard]
+  providers: [
+    AuthService,
+    AuthGuard
+  ]
 })
 export class AdmModule { }

@@ -20,7 +20,7 @@
       <form *ngIf="!isLoginForm" class="form-container" [formGroup]="formLogin">
 
         <mat-form-field class="form-input" color="accent">
-          <input matInput placeholder="E-mail" formControlName="email" [(ngModel)]="inputEmail">
+          <input matInput placeholder="E-mail" formControlName="email" [(ngModel)]="user.email">
           <mat-error *ngIf="formLogin.get('email').hasError('pattern')">
             Digite um e-mail válido
           </mat-error>
@@ -30,7 +30,7 @@
         </mat-form-field>
 
         <mat-form-field class="form-input" color="accent">
-          <input matInput placeholder="Senha" type="password" formControlName="password" [(ngModel)]="inputPassword">
+          <input matInput placeholder="Senha" type="password" formControlName="password" [(ngModel)]="user.password">
           <mat-error *ngIf="formLogin.get('password').hasError('minlength')">
             Mínimo 5 caracteres
           </mat-error>
@@ -57,7 +57,7 @@
       <form *ngIf="isLoginForm" class="form-container" [formGroup]="formLost">
 
         <mat-form-field class="form-input" color="accent">
-          <input matInput placeholder="E-mail" formControlName="email" [(ngModel)]="inputEmail">
+          <input matInput placeholder="E-mail" formControlName="email" [(ngModel)]="user.email">
           <mat-error *ngIf="formLogin.get('email').hasError('pattern')">
             Digite um e-mail válido
           </mat-error>
