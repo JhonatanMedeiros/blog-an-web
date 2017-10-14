@@ -15,6 +15,7 @@ import { LoginComponent } from './components/login/login.component';
 import { DasboardComponent } from './components/main/sub-components/dasboard/dasboard.component';
 import { MembersComponent } from './components/main/sub-components/members/members.component';
 import { PostComponent } from './components/main/sub-components/post/post.component';
+import { AuthService } from './shared/services/auth.service';
 
 
 
@@ -34,6 +35,9 @@ import { PostComponent } from './components/main/sub-components/post/post.compon
     MembersComponent,
     PostComponent,
   ],
-  providers: [AuthGuard]
+  providers: [
+    AuthService,
+    AuthGuard
+  ]
 })
 export class AdmModule { }
