@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../shared/services/auth.service';
 
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
@@ -24,7 +26,14 @@ export class LoginComponent implements OnInit {
   inProgress: boolean = false;
 
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router) {
+
+    if (this.authService.isLogin()) {
+      this.router.navigate(['/adm']);
+    }
 
     this.createFormLogin();
 
@@ -85,9 +94,32 @@ export class LoginComponent implements OnInit {
 
     this.inProgress = true;
 
-    setTimeout(() => {
-      this.inProgress = false;
-    }, 5000)
+    let body = {
+      email: this.inputEmail,
+      password: this.inputPassword
+    }
+
+
+
+    this.authService.login(body)
+      .subscribe(
+        response => {
+          console.log(response);
+
+          this.authService.setToken(response);
+          this.inProgress = false;
+
+          this.router.navigate(['/adm']);
+        },
+        error => {
+          console.log(error);
+          this.inProgress = false;
+        }
+      );
+
+    // setTimeout(() => {
+    //   this.inProgress = false;
+    // }, 5000)
 
   }
 

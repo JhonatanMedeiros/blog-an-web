@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { HttpModule } from '@angular/http';
+
+
 import { MaterialModule } from '../../material.module';
 
 import { AdmRoutingModule } from './adm-routing.module';
@@ -22,6 +25,7 @@ import { AuthService } from './shared/services/auth.service';
 @NgModule({
   imports: [
     CommonModule,
+    HttpModule,
     AdmRoutingModule,
     MaterialModule,
     FormsModule,
