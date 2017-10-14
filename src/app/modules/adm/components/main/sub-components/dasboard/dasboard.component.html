@@ -26,6 +26,20 @@
     </mat-card>
   </div>
 
-  <div class="col-xs-6"></div>
+  <div class="col-xs-6 col-md-6 col-sm-6 activities">
+
+    <h2 class="activities-title">Atividades Recentes</h2>
+
+    <mat-list class="activities-list">
+
+      <mat-list-item class="activities-list-item" *ngFor="let activity of activities">
+        <h1 mat-line>{{activity.name}}</h1>
+        <h4 mat-line>{{activity.description}}</h4>
+        <p mat-line> {{activity.updated | date}} </p>
+      </mat-list-item>
+
+    </mat-list>
+
+  </div>
 
 </div>

@@ -11,6 +11,24 @@ export class DasboardComponent implements OnInit {
 
   posts_List: PostsModel[] = [];
 
+  activities = [
+    {
+      name: 'Photos',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium animi eaque eos excepturi hic ipsa laboriosam laborum minima nostrum, quae, reprehenderit similique unde veniam? Dignissimos expedita praesentium quibusdam saepe velit.',
+      updated: new Date('1/1/16'),
+    },
+    {
+      name: 'Recipes',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium animi eaque eos excepturi hic ipsa laboriosam laborum minima nostrum, quae, reprehenderit similique unde veniam? Dignissimos expedita praesentium quibusdam saepe velit.',
+      updated: new Date('1/17/16'),
+    },
+    {
+      name: 'Work',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium animi eaque eos excepturi hic ipsa laboriosam laborum minima nostrum, quae, reprehenderit similique unde veniam? Dignissimos expedita praesentium quibusdam saepe velit.',
+      updated: new Date('1/28/16'),
+    }
+  ];
+
   constructor() {
 
     let obj1 = {
