@@ -1,0 +1,100 @@
+.sidenav-area {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+
+  .toolbar {
+    box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
+    position: relative;
+    z-index: 10;
+    flex: 0;
+  }
+
+  mat-sidenav {
+    width: 300px;
+
+    .sidebar-header {
+
+      background-repeat: no-repeat;
+      background-position: center center;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+
+      .top-bar {
+        height: 25px;
+        background: rgba(0, 0, 0, 0.1);
+      }
+
+      .sidebar-image img {
+        width: 54px;
+        height: 54px;
+        margin: 16px;
+        margin-bottom: 0px!important;
+        border-radius: 50%;
+        -webkit-transition: all 0.2s ease-in-out;
+        -o-transition: all 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out;
+      }
+
+      .sidebar-brand {
+        color: white;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: block;
+        height: 48px;
+        line-height: 48px;
+        padding: 0;
+        padding-left: 16px;
+        padding-right: 56px;
+        text-decoration: none;
+        clear: both;
+        font-weight: 500;
+        overflow: hidden;
+        -o-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+    }
+    .sidemenu-list {
+      mat-icon {
+        color: grey;
+      }
+    }
+  }
+
+
+  .mat-sidenav-container {
+    flex: 1;
+  }
+
+  .demo-sidenav-content {
+    padding: 32px;
+  }
+
+  .demo-filler-content {
+    padding: 60px;
+  }
+}
+
+.mat-nav-list .mat-list-item:hover, .mat-nav-list .mat-list-item.mat-list-item-focus {
+  background-color: none!important;
+}
+.mat-list-item-focus {
+  background-color: none !important;
+}
+.mat-nav-list .mat-list-item-content:hover, .mat-nav-list .mat-list-item-content.mat-list-item-focus {
+  background: none !important;
+  background-color: none !important;
+}
+
+.isActiveMenu {
+  background: rgba(0, 0, 0, 0.10) !important;
+}

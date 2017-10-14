@@ -1,3 +1,70 @@
-<p>main</p>
+<div class="sidenav-area">
 
-<router-outlet></router-outlet>
+  <mat-toolbar class="toolbar" color="">
+
+    <button mat-icon-button (click)="sidenav.toggle(undefined, 'mouse')">
+      <mat-icon>view_headline</mat-icon>
+    </button>
+
+    <span>Pagina Administrativa</span>
+
+
+    <!-- This fills the remaining space of the current row -->
+    <span style="flex: 1 1 auto;"></span>
+
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item disabled>
+        <mat-icon>person</mat-icon>
+        <span>Perfil</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Sair</span>
+      </button>
+    </mat-menu>
+
+  </mat-toolbar>
+
+  <mat-sidenav-container>
+    <mat-sidenav #sidenav mode="over">
+
+      <!-- Sidebar header -->
+      <div class="sidebar-header" style="background-image: url(https://2.bp.blogspot.com/-2RewSLZUzRg/U-9o6SD4M6I/AAAAAAAADIE/voax99AbRx0/s1600/14%2B-%2B1%2B%281%29.jpg);">
+        <!-- Top bar -->
+        <div class="top-bar"></div>
+        <!-- Sidebar brand image -->
+        <div class="sidebar-image">
+          <img src="assets/img/profile.png">
+        </div>
+        <!-- Sidebar brand name -->
+        <div class="sidebar-brand">
+          <span>Jhonatan</span>
+        </div>
+      </div>
+
+      <mat-nav-list class="sidemenu-list">
+
+        <mat-list-item focus="false" *ngFor="let menu of menuList" (click)="sidenav.close()"
+                       [routerLink]="[menu.link]"
+                       [ngClass]="{'isActiveMenu' : getRouter(menu)}">
+          <mat-icon matListIcon>{{menu.icon}}</mat-icon>
+          <h3 matLine> {{menu.text}} </h3>
+        </mat-list-item>
+
+      </mat-nav-list>
+    </mat-sidenav>
+
+
+    <mat-sidenav-content>
+      <div class="demo-sidenav-content">
+        <router-outlet></router-outlet>
+      </div>
+
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+
+
+</div>

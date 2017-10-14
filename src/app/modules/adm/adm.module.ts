@@ -37,7 +37,7 @@ import { AuthService } from './shared/services/auth.service';
     MainComponent,
     DasboardComponent,
     MembersComponent,
-    PostComponent,
+    PostComponent
   ],
   providers: [
     AuthService,
