@@ -1,0 +1,31 @@
+<div class="col-xs-12 col-md-12 col-sm-12">
+
+  <div class="col-xs-6 col-md-6 col-sm-6 posts">
+
+    <h2 class="posts-title">Postagens</h2>
+
+    <mat-card class="posts-card" *ngFor="let post of posts_List">
+      <mat-card-header>
+        <div mat-card-avatar class="posts-card-header-image"></div>
+        <mat-card-title class="posts-card-header-title">
+          {{post.title}}
+        </mat-card-title>
+        <mat-card-subtitle>{{post.author}}</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image *ngIf="post.imgUrl" src="{{post.imgUrl}}" alt="{{post.title}}">
+      <mat-card-content class="posts-card-content">
+        <p>
+          {{post.description}}
+        </p>
+      </mat-card-content>
+      <mat-card-actions class="posts-card-actions">
+        <a mat-raised-button [routerLink]="post.url">VER</a>
+        <a mat-raised-button>COMPARTILHAR</a>
+        <button mat-raised-button>EDITAR</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <div class="col-xs-6"></div>
+
+</div>
