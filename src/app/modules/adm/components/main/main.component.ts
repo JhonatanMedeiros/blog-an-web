@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Route } from '@angular/router';
+import { MatDialog, MAT_DIALOG_DATA} from '@angular/material';
 
 import { AuthService } from '../../shared/services/auth.service';
+import { DialogComponent } from '../../shared/dialog/dialog.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,7 +23,8 @@ export class MainComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private authService: AuthService
+    private authService: AuthService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -39,9 +42,20 @@ export class MainComponent implements OnInit {
 
   logout(): void {
 
-    this.authService.removeToken();
+    let dialogRef = this.dialog.open(DialogComponent, {
+      width: '250px'
+    });
 
-    this.router.navigate(['/login']);
+    dialogRef.afterClosed().subscribe(result => {
+
+
+      if (result == true) {
+
+        this.authService.removeToken();
+
+      }
+    });
+
   }
 
 }
