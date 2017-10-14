@@ -31,7 +31,9 @@ export class AuthService {
 
     let token = user.token;
 
-    localStorage.setItem('token', token)
+    localStorage.setItem('token', token);
+
+    this.token = token;
 
   }
 

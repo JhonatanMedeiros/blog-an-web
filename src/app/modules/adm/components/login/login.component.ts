@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../shared/services/auth.service';
+import { UserModal } from '../../shared/models/user';
 
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
@@ -20,8 +21,7 @@ export class LoginComponent implements OnInit {
 
   isLoginForm: boolean = false;
 
-  inputEmail: string = '';
-  inputPassword: string = '';
+  user: UserModal = new UserModal();
 
   inProgress: boolean = false;
 
@@ -94,14 +94,7 @@ export class LoginComponent implements OnInit {
 
     this.inProgress = true;
 
-    let body = {
-      email: this.inputEmail,
-      password: this.inputPassword
-    }
-
-
-
-    this.authService.login(body)
+    this.authService.login(this.user)
       .subscribe(
         response => {
           console.log(response);
@@ -117,9 +110,6 @@ export class LoginComponent implements OnInit {
         }
       );
 
-    // setTimeout(() => {
-    //   this.inProgress = false;
-    // }, 5000)
 
   }
 
