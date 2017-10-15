@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { PostsModel } from '../../../../shared/models/posts';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dasboard',
@@ -29,7 +30,7 @@ export class DasboardComponent implements OnInit {
     }
   ];
 
-  constructor() {
+  constructor(private route: Router) {
 
     let obj1 = {
         id: 1,
@@ -55,6 +56,10 @@ export class DasboardComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  goToUrl(url): void {
+    this.route.navigate([url]);
   }
 
 }

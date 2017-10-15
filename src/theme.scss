@@ -2,8 +2,8 @@
 @include mat-core();
 
 //Default Theme
-$my-app-primary:  mat-palette($mat-indigo);
-$my-app-accent:   mat-palette($mat-blue, A200, A100, A400);
+$my-app-primary:  mat-palette($mat-blue-grey);
+$my-app-accent:   mat-palette($mat-blue-grey, A200, A100, A400);
 $my-app-warn:     mat-palette($mat-red);
 
 $my-app-theme:    mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
