@@ -16,10 +16,11 @@
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item disabled>
-        <mat-icon>person</mat-icon>
-        <span>Perfil</span>
+      <button mat-menu-item routerLink="/blog">
+        <mat-icon>bookmark</mat-icon>
+        <span>Blog</span>
       </button>
+      <mat-divider></mat-divider>
       <button mat-menu-item (click)="logout()">
         <mat-icon>exit_to_app</mat-icon>
         <span>Sair</span>
