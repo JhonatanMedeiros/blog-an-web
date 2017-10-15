@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostComponent implements OnInit {
 
+  agendar: boolean = false;
+
 
   public froalaEditorOptsTitle: Object = {
     placeholderText: 'Escreva o titulo aqui!',
