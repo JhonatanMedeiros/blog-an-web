@@ -43,7 +43,7 @@ const routes: Routes = [
             component: PostComponent,
           },
           {
-            path: 'post',
+            path: 'posts',
             component: PostsListComponent,
           },
           {

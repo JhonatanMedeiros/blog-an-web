@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { BlogRoutingModule } from './blog-routing.module';
 import { CoreComponent } from './core/core.component';
+import { PostComponent } from './components/post/post.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 
 @NgModule({
@@ -10,6 +12,6 @@ import { CoreComponent } from './core/core.component';
     CommonModule,
     BlogRoutingModule
   ],
-  declarations: [CoreComponent]
+  declarations: [CoreComponent, PostComponent, DashboardComponent]
 })
 export class BlogModule { }
