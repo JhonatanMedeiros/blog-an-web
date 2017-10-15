@@ -40,9 +40,9 @@ export class MainComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
   }
 
-  getRouter(menu): boolean {
+  getRouter(link): boolean {
 
-    if (this.router.url == menu.link) {
+    if (this.router.url == link) {
       return true;
     }else {
       return false;

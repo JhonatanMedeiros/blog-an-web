@@ -47,13 +47,57 @@
 
       <mat-nav-list class="sidemenu-list">
 
-        <mat-list-item focus="false" *ngFor="let menu of menuList" (click)="sidenav.close()"
-                       [routerLink]="[menu.link]"
-                       [ngClass]="{'isActiveMenu' : getRouter(menu)}">
-          <mat-icon matListIcon>{{menu.icon}}</mat-icon>
-          <h3 matLine> {{menu.text}} </h3>
+        <mat-list-item (click)="sidenav.close()"
+                       [routerLink]="'/adm'"
+                       [ngClass]="{'isActiveMenu' : getRouter('/adm')}">
+          <mat-icon matListIcon>home</mat-icon>
+          <h3 matLine> Dashboard </h3>
         </mat-list-item>
+
+        <mat-list-item [matMenuTriggerFor]="postMenu">
+          <mat-icon matListIcon>note</mat-icon>
+          <h3 matLine> Postagens </h3>
+        </mat-list-item>
+
+        <mat-list-item (click)="sidenav.close()"
+                       [routerLink]="'/adm/profile'"
+                       [ngClass]="{'isActiveMenu' : getRouter('/adm/profile')}">
+          <mat-icon matListIcon>account_circle</mat-icon>
+          <h3 matLine> Perfil </h3>
+        </mat-list-item>
+
+        <mat-list-item (click)="sidenav.close()"
+                       [routerLink]="'/adm/members'"
+                       [ngClass]="{'isActiveMenu' : getRouter('/adm/members')}">
+          <mat-icon matListIcon>group</mat-icon>
+          <h3 matLine> Membros </h3>
+        </mat-list-item>
+
         <mat-divider></mat-divider>
+
+        <mat-list-item (click)="sidenav.close()"
+                       [routerLink]="'/adm/settings'"
+                       [ngClass]="{'isActiveMenu' : getRouter('/adm/settings')}">
+          <mat-icon matListIcon>settings</mat-icon>
+          <h3 matLine> Configurações </h3>
+        </mat-list-item>
+
+        <mat-divider></mat-divider>
+
+        <mat-menu #postMenu="matMenu">
+
+          <button mat-menu-item (click)="sidenav.close()"
+                  routerLink="/adm/post">
+            <mat-icon>note_add</mat-icon>
+            <span>Criar postagem</span>
+          </button>
+
+          <button mat-menu-item (click)="sidenav.close()">
+            <mat-icon>view_list</mat-icon>
+            <span>Ver postagens</span>
+          </button>
+        </mat-menu>
+
         <mat-list-item (click)="logout()">
           <mat-icon matListIcon>exit_to_app</mat-icon>
           <h3 matLine>Sair</h3>
