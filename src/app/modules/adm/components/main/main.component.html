@@ -87,12 +87,13 @@
         <mat-menu #postMenu="matMenu">
 
           <button mat-menu-item (click)="sidenav.close()"
-                  routerLink="/adm/post">
+                  routerLink="/adm/post/2">
             <mat-icon>note_add</mat-icon>
             <span>Criar postagem</span>
           </button>
 
-          <button mat-menu-item (click)="sidenav.close()">
+          <button mat-menu-item (click)="sidenav.close()"
+                  routerLink="/adm/post">
             <mat-icon>view_list</mat-icon>
             <span>Ver postagens</span>
           </button>
