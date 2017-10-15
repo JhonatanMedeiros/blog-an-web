@@ -13,6 +13,7 @@ import { PostComponent } from './components/main/sub-components/post/post.compon
 
 
 import { AuthGuard } from './shared/guard/auth-guard.service';
+import { PostsListComponent } from './components/main/sub-components/posts-list/posts-list.component';
 
 const routes: Routes = [
 
@@ -38,8 +39,12 @@ const routes: Routes = [
             component: MembersComponent,
           },
           {
-            path: 'post',
+            path: 'post/:id',
             component: PostComponent,
+          },
+          {
+            path: 'post',
+            component: PostsListComponent,
           },
           {
             path: 'profile',
