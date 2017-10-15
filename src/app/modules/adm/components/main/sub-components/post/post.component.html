@@ -1,3 +1,85 @@
-<p>
-  post works!
-</p>
+<div class="col-xs-12 col-md-12 col-sm-12">
+
+  <div class="col-xs-9 col-md-9 col-sm-9">
+    <div [froalaEditor]="froalaEditorOptsTitle"
+         style="display: inline-block;font-size: 29px;word-break: break-word;">Titulo</div>
+    <div [froalaEditor]="froalaEditorOpts"></div>
+  </div>
+
+  <div class="col-xs-3 col-md-3 col-sm-3">
+
+    <div class="publish">
+
+      <h2 class="publish-title">Publicação</h2>
+
+      <div class="publish-content">
+
+        <button mat-raised-button class="btn-publish" color="accent">Visualizar</button>
+
+        <div class="selects">
+          <mat-form-field>
+            <mat-select placeholder="Visibilidade">
+              <mat-option>
+                Todos
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <div class="check-box">
+            <mat-checkbox [(ngModel)]="agendar">Agendar</mat-checkbox>
+          </div>
+
+          <mat-form-field *ngIf="agendar">
+            <input matInput [matDatepicker]="picker" placeholder="Agendar">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker touchUi="true" #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+        <div class="btns-footer">
+          <button mat-button color="warn">DELETAR</button>
+          <button mat-raised-button color="accent">Publicar</button>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="category">
+
+      <h2 class="category-title">Categorias</h2>
+
+      <div class="category-content">
+
+        <mat-tab-group>
+          <mat-tab label="Todas">
+
+            <mat-selection-list #shoes>
+              <mat-list-option *ngFor="let shoe of typesOfShoes">
+                {{shoe}}
+              </mat-list-option>
+            </mat-selection-list>
+
+          </mat-tab>
+          <mat-tab label="Mais Usadas">
+
+            <mat-selection-list #shoes>
+              <mat-list-option *ngFor="let shoe of typesOfShoes">
+                {{shoe}}
+              </mat-list-option>
+            </mat-selection-list>
+
+          </mat-tab>
+        </mat-tab-group>
+
+        <div class="category-content-footer">
+          <button mat-button color="accent">+ ADICIONAR</button>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

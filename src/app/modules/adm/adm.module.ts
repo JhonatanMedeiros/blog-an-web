@@ -7,6 +7,8 @@ import { MatDialog } from '@angular/material';
 
 import { MaterialModule } from '../../material.module';
 
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+
 import { AdmRoutingModule } from './adm-routing.module';
 
 import { AuthGuard } from './shared/guard/auth-guard.service';
@@ -33,7 +35,9 @@ import { DialogComponent } from './shared/dialog/dialog.component';
     AdmRoutingModule,
     MaterialModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FroalaEditorModule.forRoot(),
+    FroalaViewModule.forRoot()
   ],
   declarations: [
     CoreComponent,
