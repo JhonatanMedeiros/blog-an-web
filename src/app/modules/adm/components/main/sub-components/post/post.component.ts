@@ -7,6 +7,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostComponent implements OnInit {
 
+
+  public froalaEditorOptsTitle: Object = {
+    placeholderText: 'Escreva o titulo aqui!',
+    editInPopup: true,
+    language: 'pt_br',
+    charCounterMax: 60,
+    inlineMode: false
+  };
+
+  public froalaEditorOpts: Object = {
+    placeholderText: 'Escreva o conteúdo aqui!',
+    charCounterCount: true,
+    language: 'pt_br',
+    heightMin: 300,
+    pastePlain: true,
+    theme: 'gray',
+    zIndex: 2001
+    // toolbarButtons: ['fullscreen', '|', 'bold', 'italic', 'strikeThrough', 'underline', '|', 'paragraphFormat', 'paragraphStyle', 'align', 'formatOL', 'formatUL', 'indent', 'outdent', '|', 'insertImage', 'insertLink', 'insertVideo', 'insertFile', 'html']
+  };
+
   constructor() { }
 
   ngOnInit() {
