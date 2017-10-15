@@ -1,34 +1,69 @@
-<div>
+<mat-toolbar class="toolbar-one">
 
-  <mat-toolbar class="toolbar-one">
+  <div class="col-xs-10 ">
+    <span class="title">JHONATAN</span>
+    <span>|</span>
+    <span>BLOG</span>
+  </div>
 
-    <div class="col-xs-10 ">
-      <span class="title">JHONATAN</span>
-      <span>|</span>
-      <span>BLOG</span>
-    </div>
+  <span style="flex: 1 1 auto;"></span>
 
-    <span style="flex: 1 1 auto;"></span>
-
-    <div class="col-xs-2 site">
+  <div class="col-xs-2 site">
       <span>
         SITE
       </span>
+  </div>
+
+
+</mat-toolbar>
+
+<mat-toolbar class="toolbar-two">
+
+  <mat-nav-list>
+    <mat-list-item *ngFor="let link of links" routerLinkActive="active">
+      <a matLine routerLink="{{link.link}}">{{ link.text }}</a>
+    </mat-list-item>
+  </mat-nav-list>
+
+</mat-toolbar>
+
+
+<div class="container-fluid content">
+
+
+  <div class="row">
+
+    <div class="col-md-12">
+      <!--<h2 class="posts-title">Ultimas postagens</h2>-->
+      <div class="posts-title">
+        <span>Ultimas postagens</span>
+        <span>Ver Mais</span>
+      </div>
     </div>
 
+    <div class="col-md-4 col-sm-6 col-12" *ngFor="let post of posts_List.slice(2)">
+      <mat-card class="posts-card">
+        <mat-card-header>
+          <div mat-card-avatar class="posts-card-header-image"></div>
+          <mat-card-title class="posts-card-header-title">
+            {{post.title}}
+          </mat-card-title>
+          <mat-card-subtitle>{{post.author}}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image *ngIf="post.imgUrl" src="{{post.imgUrl}}" alt="{{post.title}}">
+        <mat-card-content class="posts-card-content">
+          <p>
+            {{post.description}}
+          </p>
+        </mat-card-content>
+        <!--<mat-card-actions class="posts-card-actions">-->
+        <!--<a mat-raised-button [routerLink]="post.url">VER</a>-->
+        <!--<a mat-raised-button>COMPARTILHAR</a>-->
+        <!--<button mat-raised-button>EDITAR</button>-->
+        <!--</mat-card-actions>-->
+      </mat-card>
+    </div>
 
-  </mat-toolbar>
-
-  <mat-toolbar class="toolbar-two">
-
-    <mat-nav-list>
-      <mat-list-item *ngFor="let link of links">
-        <a matLine routerLink="{{link.link}}"
-        routerLinkActive="active">{{ link.text }}</a>
-      </mat-list-item>
-    </mat-nav-list>
-
-  </mat-toolbar>
-
+  </div>
 
 </div>
