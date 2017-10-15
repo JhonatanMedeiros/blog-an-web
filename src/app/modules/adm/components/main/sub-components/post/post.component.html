@@ -45,6 +45,41 @@
 
     </div>
 
+    <div class="category">
+
+      <h2 class="category-title">Categorias</h2>
+
+      <div class="category-content">
+
+        <mat-tab-group>
+          <mat-tab label="Todas">
+
+            <mat-selection-list #shoes>
+              <mat-list-option *ngFor="let shoe of typesOfShoes">
+                {{shoe}}
+              </mat-list-option>
+            </mat-selection-list>
+
+          </mat-tab>
+          <mat-tab label="Mais Usadas">
+
+            <mat-selection-list #shoes>
+              <mat-list-option *ngFor="let shoe of typesOfShoes">
+                {{shoe}}
+              </mat-list-option>
+            </mat-selection-list>
+
+          </mat-tab>
+        </mat-tab-group>
+
+        <div class="category-content-footer">
+          <button mat-button color="accent">+ ADICIONAR</button>
+        </div>
+
+      </div>
+
+    </div>
+
   </div>
 
 </div>

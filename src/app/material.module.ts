@@ -17,7 +17,8 @@ import {
   MatDialogModule,
   MatSelectModule,
   MatDatepickerModule,
-  MatNativeDateModule, DateAdapter, NativeDateAdapter, MAT_DATE_LOCALE
+  MatNativeDateModule, DateAdapter, NativeDateAdapter, MAT_DATE_LOCALE,
+  MatTabsModule
 } from '@angular/material';
 
 @NgModule({
@@ -38,7 +39,8 @@ import {
     MatDialogModule,
     MatSelectModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatTabsModule
   ],
   exports: [
     MatIconModule,
@@ -56,7 +58,8 @@ import {
     MatDialogModule,
     MatSelectModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatTabsModule
   ],
   providers: [
     {provide: DateAdapter, useClass: NativeDateAdapter},

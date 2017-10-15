@@ -9,6 +9,8 @@ export class PostComponent implements OnInit {
 
   agendar: boolean = false;
 
+  typesOfShoes = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
+
 
   public froalaEditorOptsTitle: Object = {
     placeholderText: 'Escreva o titulo aqui!',
@@ -22,7 +24,7 @@ export class PostComponent implements OnInit {
     placeholderText: 'Escreva o conteúdo aqui!',
     charCounterCount: true,
     language: 'pt_br',
-    heightMin: 300,
+    heightMin: 550,
     pastePlain: true,
     theme: 'gray',
     zIndex: 2001
