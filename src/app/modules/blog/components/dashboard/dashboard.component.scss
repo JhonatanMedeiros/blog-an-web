@@ -1,0 +1,35 @@
+$blog-primary: #404040;
+$blog-accent: #bdbdbd;
+
+.toolbar-one {
+
+  font-family: Montserrat,Helvetica Neue,Helvetica,Arial,sans-serif;
+  background: $blog-primary;
+  color: white;
+  font-weight: 700;
+  font-size: 17px;
+
+  .title {
+    font-weight: 700;
+  }
+  .site {
+    span {
+      float: right;
+    }
+  }
+
+}
+
+.toolbar-two {
+
+  background: $blog-accent;
+
+  mat-nav-list {
+    display: inline-flex;
+    a {
+      color: white;
+      text-transform: uppercase;
+    }
+  }
+
+}
