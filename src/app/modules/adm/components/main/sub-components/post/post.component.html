@@ -1,9 +1,13 @@
 <div class="col-xs-12 col-md-12 col-sm-12">
 
   <div class="col-xs-9 col-md-9 col-sm-9">
-    <div [froalaEditor]="froalaEditorOptsTitle"
-         style="display: inline-block;font-size: 29px;word-break: break-word;">Titulo</div>
-    <div [froalaEditor]="froalaEditorOpts"></div>
+    <div>
+      <mat-form-field style="width: 100%;">
+        <input matInput placeholder="Titulo da Postagem" [(ngModel)]="post.title">
+      </mat-form-field>
+    </div>
+
+    <div [froalaEditor]="froalaEditorOpts" [(froalaModel)]="post.content"></div>
   </div>
 
   <div class="col-xs-3 col-md-3 col-sm-3">
@@ -37,8 +41,9 @@
         </div>
 
         <div class="btns-footer">
-          <button mat-button color="warn">DELETAR</button>
-          <button mat-raised-button color="accent">Publicar</button>
+          <button mat-button color="warn" [disabled]="!postId">DELETAR</button>
+          <button mat-raised-button color="accent" *ngIf="!postId" (click)="postPublish()">Publicar</button>
+          <button mat-raised-button color="accent" *ngIf="postId" (click)="postEdit()">Salvar</button>
         </div>
 
       </div>

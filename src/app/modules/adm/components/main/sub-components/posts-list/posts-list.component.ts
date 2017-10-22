@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { PostsModel } from '../../../../shared/models/posts';
+import { PostService } from '../../../../shared/services/post.service';
 
 @Component({
   selector: 'app-posts-list',
@@ -11,33 +12,30 @@ export class PostsListComponent implements OnInit {
 
   posts_List: PostsModel[] = [];
 
-  constructor() {
+  constructor(
+    private postService: PostService
+  ) { }
 
-    let obj1 = {
-      id: 1,
-      url: '/blog',
-      title: 'Post 1',
-      imgUrl: 'http://material.angular.io/assets/img/examples/shiba2.jpg',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi architecto assumenda, delectus eligendi est et eum expedita fugiat fugit impedit itaque nulla odio omnis saepe sint tenetur veniam voluptatem?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi architecto assumenda, delectus eligendi est et eum expedita fugiat fugit impedit itaque nulla odio omnis saepe sint tenetur veniam voluptatem?',
-      author: 'Nome',
-      authorId: 1
-    };
-    let obj2 = {
-      id: 2,
-      url: '/blog',
-      title: 'Post 2',
-      imgUrl: '',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi architecto assumenda, delectus eligendi est et eum expedita fugiat fugit impedit itaque nulla odio omnis saepe sint tenetur veniam voluptatem?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi architecto assumenda, delectus eligendi est et eum expedita fugiat fugit impedit itaque nulla odio omnis saepe sint tenetur veniam voluptatem?',
-      author: 'Nome',
-      authorId: 2
-    };
+  ngOnInit() {
 
-    this.posts_List.push(obj1);
-    this.posts_List.push(obj2);
+    this.getPosts();
 
   }
 
-  ngOnInit() {
+
+  getPosts(): void {
+
+    this.postService.getPosts()
+      .subscribe(
+        response => {
+          this.posts_List = response;
+          console.log(this.posts_List)
+
+        },
+        error => {
+          console.log(error);
+        }
+      );
   }
 
 }

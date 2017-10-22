@@ -39,6 +39,10 @@ const routes: Routes = [
             component: MembersComponent,
           },
           {
+            path: 'post',
+            component: PostComponent,
+          },
+          {
             path: 'post/:id',
             component: PostComponent,
           },
