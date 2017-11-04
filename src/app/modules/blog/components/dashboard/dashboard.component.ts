@@ -9,9 +9,9 @@ export class DashboardComponent implements OnInit {
 
   links = [
     {text: 'Inicio', link: '/'},
-    {text: 'Recentes', link: '/posts'},
-    {text: 'Angular 2', link: '/category1'},
-    {text: 'Node.js', link: '/category2'}
+    {text: 'Recentes', link: '/blog/posts'},
+    {text: 'Angular 2', link: '/blog/category1'},
+    {text: 'Node.js', link: '/blog/category2'}
     ];
 
   posts_List = [];
