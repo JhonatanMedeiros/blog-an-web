@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  api_url: 'localhost:3000/'
+  api_url: 'https://blog-an-api.herokuapp.com/api/'
 };

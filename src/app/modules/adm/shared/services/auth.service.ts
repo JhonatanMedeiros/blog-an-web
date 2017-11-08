@@ -38,12 +38,14 @@ export class AuthService {
   setToken(user): void {
 
     localStorage.setItem('token', user.token);
+    localStorage.setItem('user', JSON.stringify(user.user));
 
   }
 
   removeToken(): void {
 
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
     this.router.navigate(['/login']);
 
   }

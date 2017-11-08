@@ -1,0 +1,108 @@
+$blog-primary: #404040;
+$blog-accent: #bdbdbd;
+
+.toolbar-one {
+
+  font-family: Montserrat,Helvetica Neue,Helvetica,Arial,sans-serif;
+  background: $blog-primary;
+  color: white;
+  font-weight: 700;
+  font-size: 17px;
+
+  .title {
+    font-weight: 700;
+  }
+  .site {
+    span {
+      float: right;
+    }
+  }
+
+}
+
+.toolbar-two {
+
+  //background: $blog-accent;
+
+  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
+
+  mat-nav-list {
+    overflow: auto;
+    width: 100%;
+    display: inline-flex;
+    a {
+      color: black;
+      text-transform: uppercase;
+    }
+
+    .active {
+      background: rgba(0, 0, 0, 0.10);
+    }
+  }
+
+}
+
+.content {
+  margin-top: 20px;
+
+
+  .posts {
+
+    &-title {
+
+      flex: 1 1 auto;
+
+      border-bottom: 1px solid rgba(0,0,0,.54);
+      margin-bottom: 20px;
+
+
+      span:first-child {
+        font-weight: 700;
+        font-size: 22px;
+        color: rgba(0,0,0,.84);
+      }
+      span:last-child {
+        color: #616161;
+        cursor: pointer;
+        float: right;
+        font-size: 16px;
+      }
+    }
+
+    &-card {
+
+      margin-bottom: 17px;
+
+      &-header {
+
+        &-image {
+          background-image: url('http://material.angular.io/assets/img/examples/shiba1.jpg');
+          background-size: cover;
+        }
+
+        &-title {
+          word-break: break-all;
+        }
+      }
+
+      &-content {
+        p {
+          overflow: hidden;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+        }
+      }
+
+      &-actions {
+
+        text-align: center;
+
+        a {
+          text-decoration: none;
+        }
+      }
+
+    }
+  }
+}

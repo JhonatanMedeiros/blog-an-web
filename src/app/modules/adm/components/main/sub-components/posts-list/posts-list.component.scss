@@ -1,11 +1,4 @@
-.posts {
-
-  &-title {
-    text-align: center;
-    color: #616161;
-    cursor: pointer;
-    text-decoration: none;
-  }
+.posts-list {
 
   &-card {
 
@@ -34,7 +27,7 @@
 
     &-actions {
 
-      text-align: center;
+      text-align: right;
 
       a {
         text-decoration: none;
@@ -43,27 +36,8 @@
 
   }
 
-
 }
 
-.activities {
+.posts-filter {
 
-  &-title {
-    text-align: center;
-    color: #616161;
-  }
-
-  &-list {
-
-    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
-    background-color: white;
-
-    &-item {
-      border-bottom: solid 1px #cecece;
-
-      h1 {
-        font-weight: 700;
-      }
-    }
-  }
 }

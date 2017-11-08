@@ -15,7 +15,8 @@ export class MainComponent implements OnInit, OnDestroy {
   menuList = [
     {icon: 'home', text: 'Dashboard', link: '/adm'},
     {icon: 'account_circle', text: 'Perfil', link: '/adm/profile'},
-    {icon: 'note', text: 'Postagens', link: '/adm/post'},
+    {icon: 'note', text: 'Postagens', link: '/adm/posts'},
+    {icon: 'note', text: 'Postagem', link: '/adm/post'},
     {icon: 'group', text: 'Membros', link: '/adm/members'},
     {icon: 'settings', text: 'Configurações', link: '/adm/settings'},
   ];
@@ -40,9 +41,9 @@ export class MainComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
   }
 
-  getRouter(menu): boolean {
+  getRouter(link): boolean {
 
-    if (this.router.url == menu.link) {
+    if (this.router.url == link) {
       return true;
     }else {
       return false;

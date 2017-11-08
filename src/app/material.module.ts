@@ -18,8 +18,12 @@ import {
   MatSelectModule,
   MatDatepickerModule,
   MatNativeDateModule, DateAdapter, NativeDateAdapter, MAT_DATE_LOCALE,
-  MatTabsModule
+  MatTabsModule,
+  MatPaginatorModule,
+  MatPaginatorIntl
 } from '@angular/material';
+
+import { CustomPaginator } from './shared/CustomPaginator';
 
 @NgModule({
   imports: [
@@ -40,7 +44,8 @@ import {
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatTabsModule
+    MatTabsModule,
+    MatPaginatorModule
   ],
   exports: [
     MatIconModule,
@@ -59,12 +64,14 @@ import {
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatTabsModule
+    MatTabsModule,
+    MatPaginatorModule
   ],
+  declarations: [],
   providers: [
     {provide: DateAdapter, useClass: NativeDateAdapter},
     {provide: MAT_DATE_LOCALE, useValue: 'pt-BR'},
-  ],
-  declarations: []
+    { provide: MatPaginatorIntl, useClass: CustomPaginator }
+  ]
 })
 export class MaterialModule { }

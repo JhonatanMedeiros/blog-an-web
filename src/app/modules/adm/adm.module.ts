@@ -25,6 +25,8 @@ import { AuthService } from './shared/services/auth.service';
 import { ProfileComponent } from './components/main/sub-components/profile/profile.component';
 import { SettingsComponent } from './components/main/sub-components/settings/settings.component';
 import { DialogComponent } from './shared/dialog/dialog.component';
+import { PostsListComponent } from './components/main/sub-components/posts-list/posts-list.component';
+import { PostService } from './shared/services/post.service';
 
 
 
@@ -48,13 +50,15 @@ import { DialogComponent } from './shared/dialog/dialog.component';
     PostComponent,
     ProfileComponent,
     SettingsComponent,
-    DialogComponent
+    DialogComponent,
+    PostsListComponent
   ],
   entryComponents: [
     DialogComponent
   ],
   providers: [
     AuthService,
+    PostService,
     AuthGuard,
     MatDialog
   ]
