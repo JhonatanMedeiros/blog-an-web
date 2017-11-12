@@ -12,7 +12,7 @@ import { environment } from '../../../../../environments/environment';
 @Injectable()
 export class PostService {
 
-  authToken;
+  authToken: string = '';
 
   constructor(
     private router: Router,
@@ -20,18 +20,12 @@ export class PostService {
 
     this.authToken = window.localStorage.getItem('token');
 
-    console.log(this.authToken)
-
   }
 
 
   private _serverError(err: any) {
-    console.log('sever error:', err);  // debug
     if (err instanceof Response) {
       return Observable.throw(err.json() || 'backend server error');
-      // if you're using lite-server, use the following line
-      // instead of the line above:
-      // return Observable.throw(err.text() || 'backend server error');
     }
     return Observable.throw(err || 'backend server error');
   }
@@ -41,15 +35,12 @@ export class PostService {
   getPosts(): Observable<any> {
 
     let headers = new Headers();
-    // headers.append('Access-Control-Allow-Origin', '*');
-    // headers.append('Authorization', 'Bearer ' +  this.authToken);
     headers.append('Authorization', `Bearer ${this.authToken}`);
 
     let options = new RequestOptions({ headers: headers });
 
     return this.http.get(environment.api_url + 'adm/posts', options)
       .map(res => res.json())
-      .do(data => console.log('server data:', data))  // debug
       .catch(this._serverError);
   }
 
@@ -61,11 +52,7 @@ export class PostService {
 
     return this.http.post(environment.api_url + 'adm/post', body, options)
       .map(res => res.json())
-      .catch(err => {
-        throw new Error(err.message);
-      });
-
-
+      .catch(this._serverError);
   }
 
   editPost(body): Observable<any> {
@@ -77,9 +64,7 @@ export class PostService {
 
     return this.http.put(environment.api_url + 'adm/post/' + body._id, body, options)
       .map(res => res.json())
-      .catch(err => {
-        throw new Error(err.message);
-      });
+      .catch(this._serverError);
   }
 
   getPost(id): Observable<any> {
@@ -92,9 +77,7 @@ export class PostService {
 
     return this.http.get(environment.api_url + 'adm/post/' + id, options)
       .map(res => res.json())
-      .catch(err => {
-        throw new Error(err.message);
-      });
+      .catch(this._serverError);
   }
 
   deletePost(id): Observable<any> {
@@ -107,9 +90,7 @@ export class PostService {
 
     return this.http.delete(environment.api_url + 'adm/post/' + id, options)
       .map(res => res.json())
-      .catch(err => {
-        throw new Error(err.message);
-      });
+      .catch(this._serverError);
   }
 
 

@@ -29,7 +29,18 @@ export class AuthService {
   getToken (): any {
 
     if (localStorage.getItem('token') !== null) {
-      return localStorage.getItem('token');
+
+      let token = localStorage.getItem('token');
+
+      if (token.length < 215) {
+
+        return false
+
+      } else {
+        return token;
+      }
+
+
     }else {
       return false;
     }
