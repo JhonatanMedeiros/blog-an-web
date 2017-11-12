@@ -73,9 +73,7 @@ export class AuthService {
 
     return this.http.post(environment.api_url + 'auth/login', body)
       .map(res => res.json())
-      .catch(err => {
-        throw new Error(err.message);
-      });
+      .catch(this._serverError);
 
 
   }
@@ -95,6 +93,16 @@ export class AuthService {
       });
 
 
+  }
+
+
+
+
+  private _serverError(err: any) {
+    if (err instanceof Response) {
+      return Observable.throw(err.json() || 'backend server error');
+    }
+    return Observable.throw(err || 'backend server error');
   }
 
 }
