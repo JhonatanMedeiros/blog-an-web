@@ -54,7 +54,8 @@ export class MainComponent implements OnInit, OnDestroy {
   logout(): void {
 
     let dialogRef = this.dialog.open(DialogComponent, {
-      width: '250px'
+      width: '250px',
+      data: { title: 'Deseja Sair ?', showBtnNo: true, showBtnYes: true}
     });
 
     dialogRef.afterClosed().subscribe(result => {

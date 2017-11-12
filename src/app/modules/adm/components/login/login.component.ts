@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog, MAT_DIALOG_DATA} from '@angular/material';
+
 import { AuthService } from '../../shared/services/auth.service';
+
+import { DialogComponent } from '../../shared/dialog/dialog.component';
+
 import { UserModal } from '../../shared/models/user';
+
 
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
@@ -29,7 +34,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router) {
+    private router: Router,
+    public dialog: MatDialog) {
 
     if (this.authService.isLogin()) {
       this.router.navigate(['/adm']);
@@ -104,7 +110,10 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/adm']);
         },
         error => {
-          console.log(error);
+
+          let msgError = JSON.parse(error._body);
+
+          this.modalOpen(msgError.error);
           this.inProgress = false;
         }
       );
@@ -119,6 +128,26 @@ export class LoginComponent implements OnInit {
     setTimeout(() => {
       this.inProgress = false;
     }, 5000)
+
+  }
+
+
+  modalOpen(msg): void {
+
+    let dialogRef = this.dialog.open(DialogComponent, {
+      width: '350px',
+      data: {
+        title: 'AVISO',
+        msg: msg,
+        showBtnNo: true,
+        showBtnYes: false,
+        btnNoMsg: 'Cancelar'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+    });
 
   }
 
