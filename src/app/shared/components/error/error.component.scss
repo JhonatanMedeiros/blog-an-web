@@ -1,0 +1,22 @@
+.center {
+  width: 800px;
+  margin-left: -400px;
+}
+
+.center {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  text-align: center;
+}
+
+.error {
+  text-shadow: 0 -1px 0 rgba(0,0,0,0.9), 0 1px 0 rgba(255,255,255,0.7);
+}
+
+.error {
+  margin: 0;
+  font-size: 200px;
+  line-height: 200px;
+  font-weight: bold;
+}

@@ -13,11 +13,13 @@ import { BlogModule } from './modules/blog/blog.module';
 
 import { ErrorService } from './shared/services/local-services/error.service';
 import { LoggingService } from './shared/services/local-services/logging.service';
+import { ErrorComponent } from './shared/components/error/error.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,

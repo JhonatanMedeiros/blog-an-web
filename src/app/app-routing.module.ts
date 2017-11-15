@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { ErrorComponent } from './shared/components/error/error.component';
+
 const routes: Routes = [
   { path: '', redirectTo: 'blog', pathMatch: 'full' },
   {
@@ -11,7 +13,11 @@ const routes: Routes = [
     path: 'adm',
     loadChildren: 'app/modules/adm/adm.module#AdmModule'
   },
-  { path: '**', redirectTo: 'blog' }
+  {
+    path: 'error',
+    component: ErrorComponent
+  },
+  { path: '**', redirectTo: 'error?type=404' }
 ];
 
 @NgModule({
