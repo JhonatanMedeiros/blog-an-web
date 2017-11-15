@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { PostsModel } from '../../../../shared/models/posts';
 import { PostService } from '../../../../shared/services/post.service';
+import { LoggingService } from '../../../../../../shared/services/local-services/logging.service';
 
 @Component({
   selector: 'app-posts-list',
@@ -13,7 +14,8 @@ export class PostsListComponent implements OnInit {
   posts_List: PostsModel[] = [];
 
   constructor(
-    private postService: PostService
+    private postService: PostService,
+    private log: LoggingService
   ) { }
 
   ngOnInit() {
@@ -29,11 +31,9 @@ export class PostsListComponent implements OnInit {
       .subscribe(
         response => {
           this.posts_List = response;
-          console.log(this.posts_List)
-
         },
         error => {
-          console.log(error);
+          this.log.error('post_list', error)
         }
       );
   }

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
@@ -8,15 +7,19 @@ import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/do';  // debug
 
 import { environment } from '../../../../../environments/environment';
+import { GenericService } from '../../../../shared/services/local-services/generic.service';
+import { ErrorService } from '../../../../shared/services/local-services/error.service';
 
 @Injectable()
-export class PostService {
+export class PostService extends GenericService {
 
   authToken: string = '';
 
   constructor(
-    private router: Router,
-    private http: Http) {
+    public http: Http,
+    public errorService: ErrorService) {
+
+    super(http, errorService);
 
     this.authToken = window.localStorage.getItem('token');
 
@@ -40,8 +43,10 @@ export class PostService {
     let options = new RequestOptions({ headers: headers });
 
     return this.http.get(environment.api_url + 'adm/posts', options)
-      .map(res => res.json())
-      .catch(this._serverError);
+      // .map(res => res.json())
+      .map(this.handleData)
+      // .catch(this._serverError);
+      .catch(error => this.handleError(error));
   }
 
   savePost(body): Observable<any> {

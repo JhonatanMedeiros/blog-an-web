@@ -11,6 +11,9 @@ import { AppComponent } from './app.component';
 import { AdmModule } from './modules/adm/adm.module';
 import { BlogModule } from './modules/blog/blog.module';
 
+import { ErrorService } from './shared/services/local-services/error.service';
+import { LoggingService } from './shared/services/local-services/logging.service';
+
 
 @NgModule({
   declarations: [
@@ -27,7 +30,10 @@ import { BlogModule } from './modules/blog/blog.module';
   exports: [
     MaterialModule
   ],
-  providers: [],
+  providers: [
+    ErrorService,
+    LoggingService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

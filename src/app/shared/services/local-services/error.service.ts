@@ -1,0 +1,64 @@
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+
+
+@Injectable()
+export class ErrorService {
+
+  constructor(private router: Router) { }
+
+  process(error): void {
+
+    let responseObj = error.text();
+
+    console.error(error);
+
+    if (!responseObj) {
+      // redirect to 500 page
+      console.error('no error msg from server.');
+      this.router.navigateByUrl('/error?type=500', {replaceUrl: true});
+      return;
+    }
+
+    switch (error.status) {
+      case 400: {
+        // generate modal inside component
+        break;
+      }
+
+      case 401: {
+        // UNAUTHORIZED
+        if (error.url.indexOf('/token')) {
+          break;
+        }
+
+        // check if profile/me to navigate to /login, else navigate to 401 page
+        if (error.url.indexOf('/profile/me') == -1) {
+          this.router.navigateByUrl('/error?type=401', {replaceUrl: true});
+        } else {
+          localStorage.removeItem('token');
+          window.location.reload();
+        }
+        break;
+      }
+
+      case 404: {
+        // NOT FOUND
+        this.router.navigateByUrl('/error?type=404', {replaceUrl: true});
+        break;
+      }
+
+      case 500: {
+        // SERVER ERROR
+        this.router.navigateByUrl('/error?type=500', {replaceUrl: true});
+        break;
+      }
+
+      default:
+        // DEFAULT REDIRECT TO ERROR 500
+        this.router.navigateByUrl('/error?type=' + error.status, {replaceUrl: true});
+        break;
+    }
+  }
+
+}
