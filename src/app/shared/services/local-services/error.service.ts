@@ -21,24 +21,10 @@ export class ErrorService {
     }
 
     switch (error.status) {
-      case 400: {
-        // generate modal inside component
-        break;
-      }
-
       case 401: {
-        // UNAUTHORIZED
-        if (error.url.indexOf('/token')) {
-          break;
-        }
-
-        // check if profile/me to navigate to /login, else navigate to 401 page
-        if (error.url.indexOf('/profile/me') == -1) {
-          this.router.navigateByUrl('/error?type=401', {replaceUrl: true});
-        } else {
-          localStorage.removeItem('token');
-          window.location.reload();
-        }
+        this.router.navigateByUrl('/error?type=401', {replaceUrl: true});
+        // localStorage.removeItem('token');
+        // window.location.reload();
         break;
       }
 

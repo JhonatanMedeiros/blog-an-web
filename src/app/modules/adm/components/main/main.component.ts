@@ -4,6 +4,7 @@ import { MatDialog, MAT_DIALOG_DATA} from '@angular/material';
 
 import { AuthService } from '../../shared/services/auth.service';
 import { DialogComponent } from '../../shared/dialog/dialog.component';
+import { UserProfileService } from '../../shared/services/user-profile.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -27,8 +28,18 @@ export class MainComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     private authService: AuthService,
+    private userProfile: UserProfileService,
     public dialog: MatDialog
   ) {
+
+    this.userProfile.myProfile().subscribe(
+      response => {
+        // console.log(response);
+      },
+      error => {
+        // console.log(error);
+      }
+    );
 
     router.events.subscribe((val) => {
       this.setNavTitle();

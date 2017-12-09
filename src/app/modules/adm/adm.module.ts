@@ -27,6 +27,7 @@ import { SettingsComponent } from './components/main/sub-components/settings/set
 import { DialogComponent } from './shared/dialog/dialog.component';
 import { PostsListComponent } from './components/main/sub-components/posts-list/posts-list.component';
 import { PostService } from './shared/services/post.service';
+import { UserProfileService } from './shared/services/user-profile.service';
 
 
 
@@ -59,6 +60,7 @@ import { PostService } from './shared/services/post.service';
   providers: [
     AuthService,
     PostService,
+    UserProfileService,
     AuthGuard,
     MatDialog
   ]

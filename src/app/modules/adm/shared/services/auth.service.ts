@@ -9,13 +9,15 @@ import { environment } from '../../../../../environments/environment';
 
 import { ErrorService } from '../../../../shared/services/local-services/error.service';
 import { GenericService } from '../../../../shared/services/local-services/generic.service';
+import { HttpService } from '../../../../shared/services/local-services/http.service';
 
 @Injectable()
-export class AuthService extends GenericService{
+export class AuthService extends GenericService {
 
   constructor(
     private router: Router,
-    public http: Http,
+    // public http: Http,
+    public http: HttpService,
     public errorService: ErrorService) {
 
     super(http, errorService);
@@ -77,7 +79,7 @@ export class AuthService extends GenericService{
     // headers.append('Content-Type', 'application/x-www-form-urlencoded');
     // let options = new RequestOptions({ headers: headers });
 
-    return this.http.post(environment.api_url + 'auth/login', body)
+    return this.http.post('auth/login', body)
       .map(res => this.handleData(res))
       .catch(this.handleError);
 

@@ -31,6 +31,18 @@ export class ErrorComponent implements OnInit {
 
           break;
         }
+        case 400: {
+
+          this.typeMsg = 'Bad Request!';
+
+          break;
+        }
+        case 401: {
+
+          this.typeMsg = 'Você não está autorizado!';
+
+          break;
+        }
         case 403: {
 
           this.typeMsg = 'Você não está autorizado!';

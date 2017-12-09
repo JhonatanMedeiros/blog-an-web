@@ -71,6 +71,11 @@ export class PostComponent implements OnInit {
   /* Services */
   postPublish(): void {
 
+    const str = this.post.title;
+    const replaced = str.split(' ').join('-');
+    this.post.titleUrl = replaced.toLowerCase();
+
+
     this.post.author = this.user.firstName;
     this.post.authorId = this.user._id;
 
@@ -78,12 +83,11 @@ export class PostComponent implements OnInit {
       .subscribe(
         response => {
 
-          this.post = new PostsModel();
+          // this.post = new PostsModel();
 
         },
         error => {
           console.log(error);
-
           this.post = new PostsModel();
 
         }
@@ -121,12 +125,13 @@ export class PostComponent implements OnInit {
       );
   }
 
-  deletePost(id: any): void {
+  deletePost(): void {
 
-    this.postService.deletePost(id)
+    this.postService.deletePost(this.post._id)
       .subscribe(
         response => {
           console.log(response);
+          this.router.navigate(['/adm/posts'])
         },
         error => {
           console.log(error);

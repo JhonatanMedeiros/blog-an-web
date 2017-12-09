@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions } from '@angular/http';
+import { Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/catch'
 import 'rxjs/add/observable/throw';
-import 'rxjs/add/operator/do';  // debug
+import 'rxjs/add/operator/do';
 
-import { environment } from '../../../../../environments/environment';
 import { GenericService } from '../../../../shared/services/local-services/generic.service';
 import { ErrorService } from '../../../../shared/services/local-services/error.service';
+import { HttpService } from '../../../../shared/services/local-services/http.service';
 
 @Injectable()
 export class PostService extends GenericService {
@@ -16,7 +16,7 @@ export class PostService extends GenericService {
   authToken: string = '';
 
   constructor(
-    public http: Http,
+    public http: HttpService,
     public errorService: ErrorService) {
 
     super(http, errorService);
@@ -42,7 +42,7 @@ export class PostService extends GenericService {
 
     let options = new RequestOptions({ headers: headers });
 
-    return this.http.get(environment.api_url + 'adm/posts', options)
+    return this.http.get('adm/posts', options)
       // .map(res => res.json())
       .map(this.handleData)
       // .catch(this._serverError);
@@ -55,7 +55,7 @@ export class PostService extends GenericService {
     headers.append('Authorization', 'Bearer ' +  this.authToken);
     let options = new RequestOptions({ headers: headers });
 
-    return this.http.post(environment.api_url + 'adm/post', body, options)
+    return this.http.post('adm/post', body, options)
       .map(res => res.json())
       .catch(this._serverError);
   }
@@ -67,7 +67,7 @@ export class PostService extends GenericService {
     headers.append('Authorization', 'Bearer ' +  this.authToken);
     let options = new RequestOptions({ headers: headers });
 
-    return this.http.put(environment.api_url + 'adm/post/' + body._id, body, options)
+    return this.http.put('adm/post/' + body._id, body, options)
       .map(res => res.json())
       .catch(this._serverError);
   }
@@ -80,7 +80,7 @@ export class PostService extends GenericService {
     let options = new RequestOptions({ headers: headers });
 
 
-    return this.http.get(environment.api_url + 'adm/post/' + id, options)
+    return this.http.get('adm/post/' + id, options)
       .map(res => res.json())
       .catch(this._serverError);
   }
@@ -93,7 +93,7 @@ export class PostService extends GenericService {
     let options = new RequestOptions({ headers: headers });
 
 
-    return this.http.delete(environment.api_url + 'adm/post/' + id, options)
+    return this.http.delete('adm/post/' + id, options)
       .map(res => res.json())
       .catch(this._serverError);
   }
