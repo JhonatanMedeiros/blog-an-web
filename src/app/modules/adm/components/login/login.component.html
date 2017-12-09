@@ -1,7 +1,7 @@
 <!--<mat-progress-bar mode="indeterminate" color="warn" *ngIf="inProgress"></mat-progress-bar>-->
 <div class="container">
 
-  <div>
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top: 50px">
 
     <mat-card class="card-login">
 
@@ -42,7 +42,7 @@
           </mat-error>
         </mat-form-field>
 
-        <div>
+        <div style="display: grid">
           <a mat-button routerLink="." [disabled]="inProgress" color="accent" (click)="changeFormView()">Esqueceu sua senha ?</a>
 
           <button mat-raised-button color="accent" type="button"
@@ -66,7 +66,7 @@
           </mat-error>
         </mat-form-field>
 
-        <div>
+        <div style="display: grid">
           <a mat-button routerLink="." [disabled]="inProgress" color="accent" (click)="changeFormView()">Já tenho uma conta</a>
 
           <button mat-raised-button color="accent" type="button"
@@ -80,7 +80,7 @@
 
     </mat-card>
 
-    <footer>
+    <footer class="footer">
       <div class="card-footer">
         <a mat-button routerLink=".">
           Ajuda
