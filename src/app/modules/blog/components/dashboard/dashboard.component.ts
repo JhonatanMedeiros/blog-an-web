@@ -1,11 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+
+
+import { PostService } from '../../shared/services/post.service';
+
+
+import { PostsModel } from '../../../adm/shared/models/posts';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
 
   links = [
     {text: 'Inicio', link: '/'},
@@ -14,37 +22,52 @@ export class DashboardComponent implements OnInit {
     {text: 'Node.js', link: '/blog/category2'}
     ];
 
-  posts_List = [];
+  posts_List: PostsModel[] = [];
 
-  constructor() {
 
-    let obj1 = {
-      id: 1,
-      url: '/blog',
-      title: 'Posttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt 1',
-      imgUrl: 'http://material.angular.io/assets/img/examples/shiba2.jpg',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi architecto assumenda, delectus eligendi est et eum expedita fugiat fugit impedit itaque nulla odio omnis saepe sint tenetur veniam voluptatem?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi architecto assumenda, delectus eligendi est et eum expedita fugiat fugit impedit itaque nulla odio omnis saepe sint tenetur veniam voluptatem?',
-      author: 'Nome',
-      authorId: 1
-    };
-    let obj2 = {
-      id: 2,
-      url: '/blog',
-      title: 'Post 2',
-      imgUrl: 'http://material.angular.io/assets/img/examples/shiba2.jpg',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi architecto assumenda, delectus eligendi est et eum expedita fugiat fugit impedit itaque nulla odio omnis saepe sint tenetur veniam voluptatem?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi architecto assumenda, delectus eligendi est et eum expedita fugiat fugit impedit itaque nulla odio omnis saepe sint tenetur veniam voluptatem?',
-      author: 'Nome',
-      authorId: 2
-    };
 
-    this.posts_List.push(obj1);
-    this.posts_List.push(obj1);
-    this.posts_List.push(obj2);
-    this.posts_List.push(obj1);
-    this.posts_List.push(obj2);
+  /**
+   * Subscribes:
+   */
+  getPostsSub: Subscription;
+
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private postService: PostService
+  ) {
+
   }
 
   ngOnInit() {
+
+    this.getPosts();
+
+  }
+
+  ngOnDestroy() {
+
+    this.getPostsSub.unsubscribe();
+
+  }
+
+
+  /**
+   * Services:
+   */
+  getPosts(): void {
+
+    this.getPostsSub = this.postService.getPosts()
+      .subscribe(
+        res => {
+          console.log(res);
+          this.posts_List = res;
+        },
+        error => {
+          console.log(error)
+        }
+      );
+
   }
 
 }
