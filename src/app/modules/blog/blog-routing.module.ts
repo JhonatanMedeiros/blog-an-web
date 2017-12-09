@@ -12,7 +12,7 @@ const routes: Routes = [
     component: CoreComponent,
     children: [
       { path: '', component: DashboardComponent},
-      { path: 'post/:id', component: PostComponent},
+      { path: 'post/:urlID', component: PostComponent},
     ]
   },
 ];

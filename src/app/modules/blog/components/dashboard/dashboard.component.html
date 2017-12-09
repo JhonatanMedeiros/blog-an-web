@@ -45,20 +45,21 @@
       </div>
     </div>
 
-    <div class="col-md-4 col-sm-6 col-12" *ngFor="let post of posts_List.slice(2)">
+    <div class="col-md-4 col-sm-6 col-12" *ngFor="let post of posts_List">
       <mat-card class="posts-card">
         <mat-card-header>
           <div mat-card-avatar class="posts-card-header-image"></div>
-          <mat-card-title class="posts-card-header-title">
+          <mat-card-title class="posts-card-header-title" [routerLink]="['/blog/post/' + post.titleUrl]">
             {{post.title}}
           </mat-card-title>
           <mat-card-subtitle>{{post.author}}</mat-card-subtitle>
         </mat-card-header>
         <img mat-card-image *ngIf="post.imgUrl" src="{{post.imgUrl}}" alt="{{post.title}}">
+        <img mat-card-image *ngIf="!post.imgUrl" src="http://material.angular.io/assets/img/examples/shiba2.jpg" alt="shiba2.jpg">
         <mat-card-content class="posts-card-content">
-          <p>
-            {{post.description}}
-          </p>
+          <!--<p>-->
+            <div [innerHtml]="post.content"></div>
+          <!--</p>-->
         </mat-card-content>
         <!--<mat-card-actions class="posts-card-actions">-->
         <!--<a mat-raised-button [routerLink]="post.url">VER</a>-->

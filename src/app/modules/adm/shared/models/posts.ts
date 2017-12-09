@@ -7,4 +7,5 @@ export class PostsModel {
   imgUrl: string;
   author: string;
   authorId: number;
+  titleUrl: string;
 }

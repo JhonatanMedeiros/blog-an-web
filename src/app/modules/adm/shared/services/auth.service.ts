@@ -1,18 +1,26 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Http, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/catch'
-import { Http, Headers, RequestOptions } from '@angular/http';
 
 import { environment } from '../../../../../environments/environment';
 
+import { ErrorService } from '../../../../shared/services/local-services/error.service';
+import { GenericService } from '../../../../shared/services/local-services/generic.service';
+import { HttpService } from '../../../../shared/services/local-services/http.service';
+
 @Injectable()
-export class AuthService {
+export class AuthService extends GenericService {
 
   constructor(
     private router: Router,
-    private http: Http) {
+    // public http: Http,
+    public http: HttpService,
+    public errorService: ErrorService) {
+
+    super(http, errorService);
   }
 
 
@@ -71,9 +79,9 @@ export class AuthService {
     // headers.append('Content-Type', 'application/x-www-form-urlencoded');
     // let options = new RequestOptions({ headers: headers });
 
-    return this.http.post(environment.api_url + 'auth/login', body)
-      .map(res => res.json())
-      .catch(this._serverError);
+    return this.http.post('auth/login', body)
+      .map(res => this.handleData(res))
+      .catch(this.handleError);
 
 
   }
