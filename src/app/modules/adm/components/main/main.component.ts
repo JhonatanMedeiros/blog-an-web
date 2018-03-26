@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router, Route, NavigationEnd } from '@angular/router';
 import { MatDialog, MAT_DIALOG_DATA} from '@angular/material';
+import { Subscription } from 'rxjs/Subscription';
 
 import { AuthService } from '../../shared/services/auth.service';
 import { DialogComponent } from '../../shared/dialog/dialog.component';
@@ -24,6 +25,8 @@ export class MainComponent implements OnInit, OnDestroy {
 
   navTitle: string = '';
 
+  subscription: Subscription;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -32,7 +35,7 @@ export class MainComponent implements OnInit, OnDestroy {
     public dialog: MatDialog
   ) {
 
-    this.userProfile.myProfile().subscribe(
+    this.subscription = this.userProfile.myProfile().subscribe(
       response => {
         // console.log(response);
       },
@@ -41,15 +44,19 @@ export class MainComponent implements OnInit, OnDestroy {
       }
     );
 
-    router.events.subscribe((val) => {
+    this.subscription = this.router.events.subscribe((val) => {
       this.setNavTitle();
     });
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   ngOnDestroy() {
+
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+
   }
 
   getRouter(link): boolean {

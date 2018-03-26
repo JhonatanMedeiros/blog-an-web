@@ -1,12 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { Subscription } from 'rxjs/Subscription';
 
 import { PostService } from '../../shared/services/post.service';
 
-
-import { PostsModel } from '../../../adm/shared/models/posts';
-import { Subscription } from 'rxjs/Subscription';
+import { PostModel } from '../../../../models/post.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,14 +21,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
     {text: 'Node.js', link: '/blog/category2'}
     ];
 
-  posts_List: PostsModel[] = [];
+  posts_List: PostModel[] = [];
 
 
 
   /**
    * Subscribes:
    */
-  getPostsSub: Subscription;
+  subscription: Subscription;
 
   constructor(
     private route: ActivatedRoute,
@@ -47,7 +46,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
 
-    this.getPostsSub.unsubscribe();
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
 
   }
 
@@ -57,11 +58,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
    */
   getPosts(): void {
 
-    this.getPostsSub = this.postService.getPosts()
+    this.subscription = this.postService.getPosts()
       .subscribe(
         res => {
-          console.log(res);
-          this.posts_List = res;
+          this.posts_List = res.posts;
         },
         error => {
           console.log(error)

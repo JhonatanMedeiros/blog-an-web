@@ -3,8 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { Subscription } from 'rxjs/Subscription';
 
-import { PostsModel } from '../../../adm/shared/models/posts';
 import { PostService } from '../../shared/services/post.service';
+
+import { PostModel } from '../../../../models/post.model';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class PostComponent implements OnInit, OnDestroy {
    *
    */
 
-  post: PostsModel = new PostsModel();
+  post: PostModel = new PostModel();
 
   postID: number;
 
@@ -30,8 +31,7 @@ export class PostComponent implements OnInit, OnDestroy {
   /**
    * Subscribe:
    */
-  routerParamsSub: Subscription;
-  getPostSub: Subscription;
+  subscription: Subscription;
 
   constructor(
     private route: ActivatedRoute,
@@ -42,7 +42,7 @@ export class PostComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    this.routerParamsSub = this.route.params
+    this.subscription = this.route.params
       .subscribe(
       params => {
 
@@ -63,8 +63,10 @@ export class PostComponent implements OnInit, OnDestroy {
    * OnDestroy
    */
   ngOnDestroy() {
-    this.routerParamsSub.unsubscribe();
-    this.getPostSub.unsubscribe();
+
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
 
@@ -73,10 +75,10 @@ export class PostComponent implements OnInit, OnDestroy {
    */
 
   getPost(urlID) {
-    this.getPostSub = this.postService.getPost(urlID)
+    this.subscription = this.postService.getPost(urlID)
       .subscribe(
         res => {
-          console.log(res)
+          this.post = res;
         },
         error => {
           console.log(error)

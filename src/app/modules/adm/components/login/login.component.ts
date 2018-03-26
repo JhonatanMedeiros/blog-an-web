@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA} from '@angular/material';
+import { Subscription } from 'rxjs/Subscription';
 
 import { AuthService } from '../../shared/services/auth.service';
-
 import { DialogComponent } from '../../shared/dialog/dialog.component';
 
-import { UserModal } from '../../shared/models/user';
+import { UserModal } from '../../../../models/user.model';
+
 
 
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -18,7 +19,7 @@ const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
   formLogin: FormGroup;
 
@@ -29,6 +30,8 @@ export class LoginComponent implements OnInit {
   user: UserModal = new UserModal();
 
   inProgress: boolean = false;
+
+  subscription: Subscription;
 
 
   constructor(
@@ -52,6 +55,51 @@ export class LoginComponent implements OnInit {
 
 
   }
+
+  ngOnDestroy() {
+
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+
+  }
+
+
+
+  /**
+   * Services
+   */
+
+  singUp(): void {
+
+    this.inProgress = true;
+
+    this.subscription = this.authService.login(this.user)
+      .subscribe(
+        response => {
+
+          this.authService.setToken(response);
+          this.inProgress = false;
+
+          this.router.navigate(['/adm']);
+        },
+        error => {
+
+          let msgError = JSON.parse(error._body);
+
+          this.modalOpen(msgError.error);
+          this.inProgress = false;
+        }
+      );
+
+
+  }
+
+
+
+  /**
+   * Functions
+   */
 
   createFormLogin() {
 
@@ -94,33 +142,6 @@ export class LoginComponent implements OnInit {
 
   }
 
-
-  //login
-  singUp(): void {
-
-    this.inProgress = true;
-
-    this.authService.login(this.user)
-      .subscribe(
-        response => {
-
-          this.authService.setToken(response);
-          this.inProgress = false;
-
-          this.router.navigate(['/adm']);
-        },
-        error => {
-
-          let msgError = JSON.parse(error._body);
-
-          this.modalOpen(msgError.error);
-          this.inProgress = false;
-        }
-      );
-
-
-  }
-
   recoveryPassword(): void {
 
     this.inProgress = true;
@@ -130,7 +151,6 @@ export class LoginComponent implements OnInit {
     }, 5000)
 
   }
-
 
   modalOpen(msg): void {
 

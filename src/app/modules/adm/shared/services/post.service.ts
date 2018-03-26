@@ -10,6 +10,8 @@ import { GenericService } from '../../../../shared/services/local-services/gener
 import { ErrorService } from '../../../../shared/services/local-services/error.service';
 import { HttpService } from '../../../../shared/services/local-services/http.service';
 
+import { PostModel, PostResponseModel } from '../../../../models/post.model';
+
 @Injectable()
 export class PostService extends GenericService {
 
@@ -35,7 +37,7 @@ export class PostService extends GenericService {
 
 
 
-  getPosts(): Observable<any> {
+  getPosts(): Observable<PostResponseModel> {
 
     let headers = new Headers();
     headers.append('Authorization', `Bearer ${this.authToken}`);
@@ -72,7 +74,7 @@ export class PostService extends GenericService {
       .catch(this._serverError);
   }
 
-  getPost(id): Observable<any> {
+  getPost(id): Observable<PostModel> {
 
 
     let headers = new Headers();

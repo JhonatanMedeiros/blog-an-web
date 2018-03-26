@@ -9,6 +9,8 @@ import { GenericService } from '../../../../shared/services/local-services/gener
 import { ErrorService } from '../../../../shared/services/local-services/error.service';
 import { HttpService } from '../../../../shared/services/local-services/http.service';
 
+import { PostResponseModel } from '../../../../models/post.model';
+
 @Injectable()
 export class PostService extends GenericService {
 
@@ -22,7 +24,7 @@ export class PostService extends GenericService {
 
 
 
-  getPosts(): Observable<any> {
+  getPosts(): Observable<PostResponseModel> {
 
     return this.http.get('blog/posts')
       .map(this.handleData)

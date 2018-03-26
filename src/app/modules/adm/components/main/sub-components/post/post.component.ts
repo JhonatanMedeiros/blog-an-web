@@ -1,24 +1,29 @@
-import { Component, OnInit } from '@angular/core';
-import { PostsModel } from '../../../../shared/models/posts';
-import { PostService } from '../../../../shared/services/post.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
+
+import { PostService } from '../../../../shared/services/post.service';
+
+import { PostModel } from '../../../../../../models/post.model';
 
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.scss']
 })
-export class PostComponent implements OnInit {
+export class PostComponent implements OnInit, OnDestroy {
 
   user: any;
 
-  post: PostsModel = new PostsModel();
+  post: PostModel = new PostModel();
 
   postId: string;
 
   agendar: boolean = false;
 
   typesOfShoes = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
+
+  subscription: Subscription;
 
 
   public froalaEditorOptsTitle: Object = {
@@ -55,8 +60,8 @@ export class PostComponent implements OnInit {
 
   ngOnInit() {
 
-    this.route.params.subscribe( params => {
-      this.postId = params['id']
+    this.subscription = this.route.params.subscribe( params => {
+      this.postId = params['id'];
 
       if (this.postId) {
         this.getPost(this.postId);
@@ -66,9 +71,18 @@ export class PostComponent implements OnInit {
 
   }
 
+  ngOnDestroy() {
 
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
 
-  /* Services */
+  }
+
+  /**
+   * Services
+   */
+
   postPublish(): void {
 
     const str = this.post.title;
@@ -76,10 +90,9 @@ export class PostComponent implements OnInit {
     this.post.titleUrl = replaced.toLowerCase();
 
 
-    this.post.author = this.user.firstName;
-    this.post.authorId = this.user._id;
+    this.post.author = this.user._id;
 
-    this.postService.savePost(this.post)
+    this.subscription = this.postService.savePost(this.post)
       .subscribe(
         response => {
 
@@ -88,7 +101,7 @@ export class PostComponent implements OnInit {
         },
         error => {
           console.log(error);
-          this.post = new PostsModel();
+          this.post = new PostModel();
 
         }
       );
@@ -97,7 +110,7 @@ export class PostComponent implements OnInit {
 
   getPost(id: any): void {
 
-    this.postService.getPost(id)
+    this.subscription = this.postService.getPost(id)
       .subscribe(
         response => {
           console.log(response);
@@ -111,10 +124,9 @@ export class PostComponent implements OnInit {
 
   postEdit(): void {
 
-    this.post.author = this.user.firstName;
-    this.post.authorId = this.user._id;
+    this.post.author = this.user._id;
 
-    this.postService.editPost(this.post)
+    this.subscription = this.postService.editPost(this.post)
       .subscribe(
         response => {
           console.log(response);
@@ -127,7 +139,7 @@ export class PostComponent implements OnInit {
 
   deletePost(): void {
 
-    this.postService.deletePost(this.post._id)
+    this.subscription = this.postService.deletePost(this.post._id)
       .subscribe(
         response => {
           console.log(response);
@@ -138,8 +150,6 @@ export class PostComponent implements OnInit {
         }
       );
   }
-
-  /* Functions */
 
 
 }

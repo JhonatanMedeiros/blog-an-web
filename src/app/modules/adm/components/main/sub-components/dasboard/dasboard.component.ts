@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
-import { PostsModel } from '../../../../shared/models/posts';
 import { Router } from '@angular/router';
+
+import { PostModel } from '../../../../../../models/post.model';
 
 @Component({
   selector: 'app-dasboard',
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class DasboardComponent implements OnInit {
 
-  posts_List: PostsModel[] = [];
+  posts_List: PostModel[] = [];
 
   activities = [
     {
