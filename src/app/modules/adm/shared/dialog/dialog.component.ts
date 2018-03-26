@@ -7,7 +7,14 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 })
 export class DialogComponent {
 
-  config: object;
+  config: {
+    title: string,
+    msg: string,
+    showBtnNo: boolean,
+    showBtnYes: boolean,
+    btnNoMsg: string,
+    btnYesMsg: string,
+  };
 
   constructor(
     public dialogRef: MatDialogRef<DialogComponent>,

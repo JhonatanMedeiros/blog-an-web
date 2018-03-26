@@ -35,15 +35,6 @@ export class MainComponent implements OnInit, OnDestroy {
     public dialog: MatDialog
   ) {
 
-    this.subscription = this.userProfile.myProfile().subscribe(
-      response => {
-        // console.log(response);
-      },
-      error => {
-        // console.log(error);
-      }
-    );
-
     this.subscription = this.router.events.subscribe((val) => {
       this.setNavTitle();
     });
