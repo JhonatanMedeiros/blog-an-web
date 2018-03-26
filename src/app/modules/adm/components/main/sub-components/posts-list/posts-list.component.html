@@ -20,9 +20,10 @@
       </mat-card-actions>
     </mat-card>
 
-    <mat-paginator [length]="posts_List.length"
-                   [pageSize]="10"
-                   [pageSizeOptions]="[5, 10, 25, 100]">
+    <mat-paginator [length]="pagination.total"
+                   [pageSize]="20"
+                   [pageSizeOptions]="[5, 10, 20]"
+                   (page)="changePage($event)">
     </mat-paginator>
 
   </div>

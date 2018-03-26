@@ -37,17 +37,25 @@ export class PostService extends GenericService {
 
 
 
-  getPosts(): Observable<PostResponseModel> {
+  getPosts(opts?: {page?: number, limit?: number}): Observable<PostResponseModel> {
+
+    let params: string = '?';
+
+    if (opts && opts.limit) {
+      params += `limit=${opts.limit}&`;
+    }
+
+    if (opts && opts.page) {
+      params += `page=${opts.page}`;
+    }
 
     let headers = new Headers();
     headers.append('Authorization', `Bearer ${this.authToken}`);
 
     let options = new RequestOptions({ headers: headers });
 
-    return this.http.get('adm/posts', options)
-      // .map(res => res.json())
+    return this.http.get('adm/posts' + params, options)
       .map(this.handleData)
-      // .catch(this._serverError);
       .catch(error => this.handleError(error));
   }
 

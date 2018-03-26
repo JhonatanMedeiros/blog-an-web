@@ -15,6 +15,13 @@ export class PostsListComponent implements OnInit, OnDestroy {
 
   posts_List: PostModel[] = [];
 
+  pagination: {page: number, pages: number, total: number, limit: number} = {
+    page: 0,
+    pages: 0,
+    total: 0,
+    limit: 0
+  };
+
   subscription: Subscription;
 
   constructor(
@@ -37,17 +44,33 @@ export class PostsListComponent implements OnInit, OnDestroy {
   }
 
 
-  getPosts(): void {
+  getPosts(opts?: {page?: number, limit?: number}): void {
 
-    this.subscription = this.postService.getPosts()
+    this.subscription = this.postService.getPosts(opts)
       .subscribe(
         response => {
+
           this.posts_List = response.posts;
+
+          this.pagination.limit = response.limit;
+          this.pagination.page = response.page;
+          this.pagination.total = response.total;
+          this.pagination.pages = response.pages;
+
         },
         error => {
           this.log.error('post_list', error)
         }
       );
+  }
+
+
+  changePage(event): void {
+
+    let pageNumber: number = event.pageIndex + 1;
+
+    this.getPosts({page: pageNumber, limit: event.pageSize});
+
   }
 
 }
