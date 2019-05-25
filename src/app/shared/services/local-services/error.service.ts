@@ -9,7 +9,7 @@ export class ErrorService {
 
   process(error): void {
 
-    let responseObj = error.text();
+    const responseObj = error.text();
 
     console.error(error);
 

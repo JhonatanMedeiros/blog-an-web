@@ -28,13 +28,14 @@ import { DialogComponent } from './shared/dialog/dialog.component';
 import { PostsListComponent } from './components/main/sub-components/posts-list/posts-list.component';
 import { PostService } from './shared/services/post.service';
 import { UserProfileService } from './shared/services/user-profile.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
 @NgModule({
   imports: [
     CommonModule,
-    HttpModule,
+    HttpClientModule,
     AdmRoutingModule,
     MaterialModule,
     FormsModule,

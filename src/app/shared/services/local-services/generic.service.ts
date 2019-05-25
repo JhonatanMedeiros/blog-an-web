@@ -1,38 +1,25 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
-
-import { Observable } from 'rxjs/Rx';
+import { HttpClient } from '@angular/common/http';
 import { ErrorService } from './error.service';
+import { Observable } from 'rxjs/Rx';
+import { of } from 'rxjs/internal/observable/of';
 
 @Injectable()
 export class GenericService {
 
-  constructor(
-    public http: Http,
-    public errorService: ErrorService
-  ) { }
+  constructor(public http: HttpClient, public errorService: ErrorService) { }
 
-  protected handleData(res: Response) {
+  handleError<T> (operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
 
-    let body = res.json();
-    return body;
-  }
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
 
-  protected handleError (error: Response) {
-    // send to error service
-    this.errorService.process(error);
+      // TODO: better job of transforming error for user consumption
 
-    // still send simple error to component, but can ignore it for now
-    let errMsg = (error) ? error :
-      error.status ? `${error.status} - ${error.statusText}` : 'Server error';
-
-    let responseObj = error.text();
-
-    if (responseObj) {
-      return Observable.throw(JSON.parse(responseObj));
-    } else {
-      return Observable.throw([errMsg]);
-    }
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
   }
 
 }

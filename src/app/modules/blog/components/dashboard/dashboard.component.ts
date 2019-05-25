@@ -6,7 +6,7 @@ import { PostService } from '../../shared/services/post.service';
 
 
 import { PostsModel } from '../../../adm/shared/models/posts';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',

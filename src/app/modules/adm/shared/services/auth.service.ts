@@ -1,23 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Http, Headers, RequestOptions } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map'
-import 'rxjs/add/operator/catch'
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs/Rx';
+import { catchError } from 'rxjs/operators';
 
 import { environment } from '../../../../../environments/environment';
 
 import { ErrorService } from '../../../../shared/services/local-services/error.service';
 import { GenericService } from '../../../../shared/services/local-services/generic.service';
-import { HttpService } from '../../../../shared/services/local-services/http.service';
+
 
 @Injectable()
 export class AuthService extends GenericService {
 
   constructor(
     private router: Router,
-    // public http: Http,
-    public http: HttpService,
+    public http: HttpClient,
     public errorService: ErrorService) {
 
     super(http, errorService);
@@ -25,31 +23,21 @@ export class AuthService extends GenericService {
 
 
   isLogin(): boolean {
-
-    if (this.getToken()) {
-      return true;
-    }else {
-      return false;
-    }
-
+    return !!this.getToken();
   }
 
   getToken (): any {
 
     if (localStorage.getItem('token') !== null) {
 
-      let token = localStorage.getItem('token');
+      const token = localStorage.getItem('token');
 
       if (token.length < 215) {
-
         return false
-
       } else {
         return token;
       }
-
-
-    }else {
+    } else {
       return false;
     }
   }
@@ -62,14 +50,10 @@ export class AuthService extends GenericService {
   }
 
   removeToken(): void {
-
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     this.router.navigate(['/login']);
-
   }
-
-
 
   login(body): Observable<any> {
 
@@ -79,38 +63,26 @@ export class AuthService extends GenericService {
     // headers.append('Content-Type', 'application/x-www-form-urlencoded');
     // let options = new RequestOptions({ headers: headers });
 
-    return this.http.post('auth/login', body)
-      .map(res => this.handleData(res))
-      .catch(this.handleError);
+    return this.http.post('auth/login', body).pipe(
+      catchError(this.handleError)
+    );
 
 
   }
 
   register(body): Observable<any> {
-
-    let headers = new Headers();
+    const headers = new HttpHeaders();
     // let authToken = this._user.getUser().JWT;
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     // headers.append('Authorization', `Bearer ${authToken}`);
-    let options = new RequestOptions({ headers: headers });
+    const options = { headers: headers };
 
     return this.http.post(environment.api_url + 'auth/register', body, options)
-      .map(res => res.json())
-      .catch(err => {
-        throw new Error(err.message);
-      });
-
-
-  }
-
-
-
-
-  private _serverError(err: any) {
-    if (err instanceof Response) {
-      return Observable.throw(err.json() || 'backend server error');
-    }
-    return Observable.throw(err || 'backend server error');
+      .pipe(
+        catchError(err => {
+          throw new Error(err.message);
+        })
+      );
   }
 
 }

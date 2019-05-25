@@ -7,11 +7,11 @@ const routes: Routes = [
   { path: '', redirectTo: 'blog', pathMatch: 'full' },
   {
     path: 'blog',
-    loadChildren: 'app/modules/blog/blog.module#BlogModule'
+    loadChildren: 'src/app/modules/blog/blog.module#BlogModule'
   },
   {
     path: 'adm',
-    loadChildren: 'app/modules/adm/adm.module#AdmModule'
+    loadChildren: 'src/app/modules/adm/adm.module#AdmModule'
   },
   {
     path: 'error',

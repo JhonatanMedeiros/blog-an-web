@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { XHRBackend, RequestOptions } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MaterialModule } from './material.module';
@@ -17,8 +16,8 @@ import { LoggingService } from './shared/services/local-services/logging.service
 import { ErrorComponent } from './shared/components/error/error.component';
 import { LoaderComponent } from './shared/components/loader/loader.component';
 import { LoaderService } from './shared/components/loader/loader.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpService } from './shared/services/local-services/http.service';
-import { httpServiceFactory } from './shared/http-service.factory';
 
 
 @NgModule({
@@ -43,11 +42,7 @@ import { httpServiceFactory } from './shared/http-service.factory';
     ErrorService,
     LoggingService,
     LoaderService,
-    {
-      provide: HttpService,
-      useFactory: httpServiceFactory,
-      deps: [XHRBackend, RequestOptions, LoaderService ]
-    }
+    { provide: HTTP_INTERCEPTORS, useClass: HttpService, multi: true }
   ],
   bootstrap: [AppComponent]
 })
